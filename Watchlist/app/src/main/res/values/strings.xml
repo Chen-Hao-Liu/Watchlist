@@ -71,7 +71,7 @@
         <item>rating</item>
     </string-array>
     <string-array name="MOrderByArr">
-        <item>Order By</item>
+        <item>Select Order By</item>
         <item>title</item>
         <item>start_date</item>
         <item>end_date</item>
