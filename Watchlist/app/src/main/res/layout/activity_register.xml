@@ -7,23 +7,20 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/watchlist"
+        android:id="@+id/register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="75dp"
-        android:drawableStart="@android:drawable/ic_menu_view"
-        android:paddingRight="20dp"
-        android:text="@string/app_name"
-        android:textAlignment="center"
-        android:textColor="@android:color/holo_blue_dark"
-        android:textSize="50sp"
+        android:text="@string/register"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="50dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/emailRegister"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="32dp"
@@ -31,17 +28,16 @@
         android:layout_marginEnd="32dp"
         android:background="@drawable/rounded_edittext_register_login"
         android:ems="10"
-        android:hint="@string/email"
+        android:hint="@string/emailRegister"
         android:inputType="textEmailAddress"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/watchlist" />
+        app:layout_constraintTop_toBottomOf="@+id/register" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/passRegisterA"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="32dp"
@@ -49,16 +45,49 @@
         android:layout_marginEnd="32dp"
         android:background="@drawable/rounded_edittext_register_login"
         android:ems="10"
-        android:hint="@string/password"
+        android:hint="@string/passRegisterA"
         android:inputType="textPassword"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+        app:layout_constraintTop_toBottomOf="@+id/emailRegister" />
+
+    <EditText
+        android:id="@+id/passRegisterB"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/rounded_edittext_register_login"
+        android:ems="10"
+        android:hint="@string/passRegisterB"
+        android:inputType="textPassword"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passRegisterA" />
 
     <Button
-        android:id="@+id/signUp"
+        android:id="@+id/submitReg"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/rounded_button"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="@string/submitReg"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passRegisterB" />
+
+    <Button
+        android:id="@+id/returnLogin"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="32dp"
@@ -67,27 +96,10 @@
         android:background="@android:color/transparent"
         android:foreground="?attr/selectableItemBackground"
         android:outlineProvider="none"
-        android:text="@string/signUp"
+        android:text="@string/returnLogin"
         android:textColor="@android:color/darker_gray"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login" />
-
-    <Button
-        android:id="@+id/login"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/rounded_button"
-        android:foreground="?attr/selectableItemBackground"
-        android:text="@string/login"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        app:layout_constraintTop_toBottomOf="@+id/submitReg" />
 </androidx.constraintlayout.widget.ConstraintLayout>

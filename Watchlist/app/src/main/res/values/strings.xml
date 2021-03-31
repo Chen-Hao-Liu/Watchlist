@@ -1,3 +1,197 @@
 <resources>
     <string name="app_name">Watchlist</string>
+
+    <string name="title_register_activity">Registration</string>
+    <string name="title_search_activity">Search</string>
+    <string name="title_results_activity">Results</string>
+
+    <string name="login">LOGIN</string>
+    <string name="signUp">REGISTER FOR ACCOUNT</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+
+    <string name="register">Register</string>
+    <string name="emailRegister">Enter Email</string>
+    <string name="passRegisterA">Enter Password</string>
+    <string name="passRegisterB">Password Confirmation</string>
+    <string name="submitReg">REGISTER</string>
+    <string name="returnLogin">RETURN TO LOGIN</string>
+
+    <string name="searchTitle">Search</string>
+    <string name="filters">Additional Filters</string>
+    <string name="searchBtn">SEARCH</string>
+
+    <string-array name="aniMangaArr">
+        <item>anime</item>
+        <item>manga</item>
+    </string-array>
+
+    <string-array name="ATypeArr">
+        <item>Select Type</item>
+        <item>tv</item>
+        <item>ova</item>
+        <item>movie</item>
+        <item>special</item>
+        <item>ona</item>
+        <item>music</item>
+    </string-array>
+    <string-array name="MTypeArr">
+        <item>Select Type</item>
+        <item>manga</item>
+        <item>novel</item>
+        <item>oneshot</item>
+        <item>doujin</item>
+        <item>manhwa</item>
+        <item>manhua</item>
+    </string-array>
+
+    <string-array name="AStatusArr">
+        <item>Select Status</item>
+        <item>airing</item>
+        <item>completed</item>
+        <item>to_be_aired</item>
+    </string-array>
+    <string-array name="MStatusArr">
+        <item>Select Status</item>
+        <item>publishing</item>
+        <item>completed</item>
+        <item>to_be_published</item>
+    </string-array>
+
+    <string-array name="AOrderByArr">
+        <item>Select Order By</item>
+        <item>title</item>
+        <item>start_date</item>
+        <item>end_date</item>
+        <item>score</item>
+        <item>type</item>
+        <item>members</item>
+        <item>id</item>
+        <item>episodes</item>
+        <item>rating</item>
+    </string-array>
+    <string-array name="MOrderByArr">
+        <item>Order By</item>
+        <item>title</item>
+        <item>start_date</item>
+        <item>end_date</item>
+        <item>score</item>
+        <item>type</item>
+        <item>members</item>
+        <item>id</item>
+        <item>chapters</item>
+        <item>volumes</item>
+    </string-array>
+
+    <string-array name="AGenreArr">
+        <item>Select Genre</item>
+        <item>Action</item>
+        <item>Adventure</item>
+        <item>Cars</item>
+        <item>Comedy</item>
+        <item>Dementia</item>
+        <item>Demons</item>
+        <item>Mystery</item>
+        <item>Drama</item>
+        <item>Ecchi</item>
+        <item>Fantasy</item>
+        <item>Game</item>
+        <item>Hentai</item>
+        <item>Historical</item>
+        <item>Horror</item>
+        <item>Kids</item>
+        <item>Magic</item>
+        <item>Martial Arts</item>
+        <item>Mecha</item>
+        <item>Music</item>
+        <item>Parody</item>
+        <item>Samurai</item>
+        <item>Romance</item>
+        <item>School</item>
+        <item>Sci Fi</item>
+        <item>Shoujo</item>
+        <item>Shoujo Ai</item>
+        <item>Shounen</item>
+        <item>Shounen Ai</item>
+        <item>Space</item>
+        <item>Sports</item>
+        <item>Super Power</item>
+        <item>Vampire</item>
+        <item>Yaoi</item>
+        <item>Yuri</item>
+        <item>Harem</item>
+        <item>Slice of Life</item>
+        <item>Supernatural</item>
+        <item>Military</item>
+        <item>Police</item>
+        <item>Psychological</item>
+        <item>Thriller</item>
+        <item>Seinen</item>
+        <item>Josei</item>
+    </string-array>
+    <string-array name="MGenreArr">
+        <item>Select Genre</item>
+        <item>Action</item>
+        <item>Adventure</item>
+        <item>Cars</item>
+        <item>Comedy</item>
+        <item>Dementia</item>
+        <item>Demons</item>
+        <item>Mystery</item>
+        <item>Drama</item>
+        <item>Ecchi</item>
+        <item>Fantasy</item>
+        <item>Game</item>
+        <item>Hentai</item>
+        <item>Historical</item>
+        <item>Horror</item>
+        <item>Kids</item>
+        <item>Magic</item>
+        <item>Martial Arts</item>
+        <item>Mecha</item>
+        <item>Music</item>
+        <item>Parody</item>
+        <item>Samurai</item>
+        <item>Romance</item>
+        <item>School</item>
+        <item>Sci Fi</item>
+        <item>Shoujo</item>
+        <item>Shoujo Ai</item>
+        <item>Shounen</item>
+        <item>Shounen Ai</item>
+        <item>Space</item>
+        <item>Sports</item>
+        <item>Super Power</item>
+        <item>Vampire</item>
+        <item>Yaoi</item>
+        <item>Yuri</item>
+        <item>Harem</item>
+        <item>Slice Of Life</item>
+        <item>Supernatural</item>
+        <item>Military</item>
+        <item>Police</item>
+        <item>Psychological</item>
+        <item>Seinen</item>
+        <item>Josei</item>
+        <item>Doujinshi</item>
+        <item>Gender Bender</item>
+        <item>Thriller</item>
+    </string-array>
+
+    <string-array name="ratedArr">
+        <item>Select Rating</item>
+        <item>g</item>
+        <item>pg</item>
+        <item>pg13</item>
+        <item>r17</item>
+        <item>r</item>
+        <item>rx</item>
+    </string-array>
+
+    <string name="seriesTitle">Shingeki no Kyojin</string>
+    <string name="synopsis">Hundreds of years ago, horrifying creatures which resembled humans appeared. These mindless, towering giants, called \"titans,\" proved to be an existential threat, as they preyed on whatever humans the</string>
+    <string name="score">8.75</string>
+    <string name="episodeNumber">Episodes:</string>
+    <string name="episodes">16</string>
+    <string name="showRating">R+</string>
 </resources>
