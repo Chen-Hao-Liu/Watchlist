@@ -1,5 +1,8 @@
 package edu.gwu.Watchlist
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Source(
     val mal_id: String,
     val url: String,
@@ -16,5 +19,9 @@ data class Source(
     val start_date: String,
     val end_date: String,
     val members: String,
-    val rated: String
-)
+    val rated: String,
+    var userScore: String,
+    var userReview: String
+): Parcelable {
+    constructor() : this("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "")
+}

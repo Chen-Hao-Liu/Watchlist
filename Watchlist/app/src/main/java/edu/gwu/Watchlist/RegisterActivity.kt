@@ -15,6 +15,7 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.database.FirebaseDatabase
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var enterEmail: EditText
@@ -71,11 +72,27 @@ class RegisterActivity : AppCompatActivity() {
                             val currentUser = firebaseAuth.currentUser!!
                             val email = currentUser.email
 
-                            Toast.makeText(
-                                this,
-                                "Successfully registered as $email",
-                                Toast.LENGTH_LONG
-                            ).show()
+                            val uid = FirebaseAuth.getInstance().uid ?: ""
+                            val ref = FirebaseDatabase.getInstance().getReference("/Users/$uid")
+                            val user = User(uid, emailInput)
+
+                            ref.setValue(user)
+                                .addOnSuccessListener {
+                                    Log.d("RegisterActivity", "Successfully registered as $email")
+                                    Toast.makeText(
+                                        this,
+                                        "Successfully registered as $email",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }
+                                .addOnFailureListener {
+                                    Log.d("RegisterActivity", "Failed to save user: $email")
+                                    Toast.makeText(
+                                        this,
+                                        "Failed to save user: $email",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }
                         }else{
                             val exception = task.exception
                             if(exception is FirebaseAuthUserCollisionException){

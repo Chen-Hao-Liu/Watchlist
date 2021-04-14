@@ -1,5 +1,6 @@
 package edu.gwu.Watchlist
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.Log
@@ -9,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.jetbrains.anko.doAsync
 import java.lang.Exception
 
@@ -26,6 +28,7 @@ class ResultsActivity : AppCompatActivity() {
     private lateinit var genre: String
     private lateinit var rated: String
     private lateinit var progressBar: ProgressBar
+    private lateinit var navBar: BottomNavigationView
     private var page: Int = 1
     // load is a flag that prevents users from loading a new page while currently loading a new page
     // meaning if they scroll to refresh, and the progressBar is still going on, scrolling again won't
@@ -46,6 +49,7 @@ class ResultsActivity : AppCompatActivity() {
         genre = intent.getStringExtra("genre")!!
         rated = intent.getStringExtra("rated")!!
 
+        navBar = findViewById(R.id.navBar_Results)
         recyclerView = findViewById(R.id.resultsRecycler)
         progressBar = findViewById(R.id.progressBar)
         sourceManager = SourceManager()
@@ -74,6 +78,29 @@ class ResultsActivity : AppCompatActivity() {
                 }
             }
         })
+
+        navBar.setSelectedItemId(R.id.action_find)
+        navBar.setOnNavigationItemSelectedListener { item->
+            when(item.itemId){
+                R.id.action_find ->{
+                    val intent = Intent(this, SearchActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.action_list ->{
+                    val intent = Intent(this, ListActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.action_top -> {
+                    //val intent = Intent(this, MapsActivity::class.java)
+                    //startActivity(intent)
+                }
+                R.id.action_profile ->{
+                    //val intent = Intent(this, ProfileActivity::class.java)
+                    //startActivity(intent)
+                }
+            }
+            return@setOnNavigationItemSelectedListener true
+        }
     }
 
     fun sourceSelection(){

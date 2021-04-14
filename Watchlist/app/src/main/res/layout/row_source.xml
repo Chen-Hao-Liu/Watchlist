@@ -23,10 +23,12 @@
 
             <TextView
                 android:id="@+id/seriesTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/topImage"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="@string/seriesTitle" />
@@ -34,7 +36,7 @@
             <TextView
                 android:id="@+id/synopsis"
                 android:layout_width="0dp"
-                android:layout_height="125dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -97,6 +99,17 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/episodeNumber"
                 app:layout_constraintTop_toBottomOf="@+id/synopsis" />
+
+            <ImageButton
+                android:id="@+id/favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/synopsis"
+                app:srcCompat="@drawable/favorite_unselected" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
