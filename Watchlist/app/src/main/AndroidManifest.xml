@@ -19,6 +19,15 @@
         <activity
             android:name=".ResultsActivity"
             android:label="@string/title_results_activity"></activity>
+        <activity
+            android:name=".ListActivity"
+            android:label="@string/title_list_activity"></activity>
+        <activity
+            android:name=".ReviewActivity"
+            android:label="@string/title_review_activity"></activity>
+        <activity
+            android:name=".OtherReviewsActivity"
+            android:label="@string/title_others_activity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

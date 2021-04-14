@@ -8,10 +8,12 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class SearchActivity : AppCompatActivity() {
     private lateinit var searchTitle: EditText
     private lateinit var searchBtn: Button
+    private lateinit var navBar: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +25,7 @@ class SearchActivity : AppCompatActivity() {
         // Acquire layout values
         searchTitle = findViewById(R.id.searchTitle)
         searchBtn = findViewById(R.id.searchBtn)
+        navBar = findViewById(R.id.navBar)
         val aniManga: Spinner = findViewById(R.id.aniManga)
         val type: Spinner = findViewById(R.id.type)
         val status: Spinner = findViewById(R.id.status)
@@ -109,6 +112,29 @@ class SearchActivity : AppCompatActivity() {
             intent.putExtra("genre", searchGenre)
             intent.putExtra("rated", searchRated)
             startActivity(intent)
+        }
+
+        navBar.setSelectedItemId(R.id.action_find)
+        navBar.setOnNavigationItemSelectedListener { item->
+            when(item.itemId){
+                R.id.action_find ->{
+
+                }
+                R.id.action_list ->{
+                    val intent = Intent(this, ListActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.action_top -> {
+                    //val intent = Intent(this, MapsActivity::class.java)
+                    //startActivity(intent)
+                }
+                R.id.action_profile ->{
+                    //val intent = Intent(this, ProfileActivity::class.java)
+                    //startActivity(intent)
+                }
+
+            }
+            return@setOnNavigationItemSelectedListener true
         }
     }
 

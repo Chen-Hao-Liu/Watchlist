@@ -4,6 +4,9 @@
     <string name="title_register_activity">Registration</string>
     <string name="title_search_activity">Search</string>
     <string name="title_results_activity">Results</string>
+    <string name="title_list_activity">My List</string>
+    <string name="title_review_activity">My Review</string>
+    <string name="title_others_activity">Audience Reviews</string>
 
     <string name="login">LOGIN</string>
     <string name="signUp">REGISTER FOR ACCOUNT</string>
@@ -194,4 +197,33 @@
     <string name="episodeNumber">Episodes:</string>
     <string name="episodes">16</string>
     <string name="showRating">R+</string>
+
+
+    <string name="find">Find</string>
+    <string name="list">My List</string>
+    <string name="top">Top</string>
+    <string name="profile">Profile</string>
+
+    <string name="savedType">TV</string>
+    <string name="savedEpisode">(12)</string>
+    <string name="memTitle">members</string>
+    <string name="members">75,012</string>
+    <string name="audScore">9.31</string>
+    <string name="yourScoreTitle">Your Score</string>
+    <string name="yourScore">N/A</string>
+
+    <string name="leaveRating">Tape to Rate</string>
+    <string name="leaveReview">Leave a Review</string>
+    <string name="submitReview">Submit Review</string>
+    <string name="readReviews">Other Reviews</string>
+    <string name="writeReview">So ...</string>
+
+    <string name="reviewEmail">chliu@gwu.edu</string>
+    <string name="reviewScore">9.5</string>
+    <string name="othersReview">Story is well written. Incredibly well fleshed-out cast of characters. Fast paced action. No filler. Every plot element has its place. AOT is truly a modern day masterpiece.</string>
+
+    <string name="reviewNum">TV (12)</string>
+    <string name="reviewMem">75,012 member</string>
+    <string name="reviewScoreTitle">Overall Score</string>
+    <string name="numReviews">No Reviews</string>
 </resources>
