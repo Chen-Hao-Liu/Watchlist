@@ -21,7 +21,8 @@ data class Source(
     val members: String,
     val rated: String,
     var userScore: String,
-    var userReview: String
+    var userReview: String,
+    var rank: String
 ): Parcelable {
-    constructor() : this("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "")
+    constructor() : this("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "")
 }

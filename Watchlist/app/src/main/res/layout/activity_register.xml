@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
     tools:context=".MainActivity">
 
     <TextView
@@ -12,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="75dp"
         android:text="@string/register"
-        android:textColor="@android:color/darker_gray"
+        android:textColor="@color/title_text"
         android:textSize="50dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -97,7 +98,7 @@
         android:foreground="?attr/selectableItemBackground"
         android:outlineProvider="none"
         android:text="@string/returnLogin"
-        android:textColor="@android:color/darker_gray"
+        android:textColor="@color/title_text"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

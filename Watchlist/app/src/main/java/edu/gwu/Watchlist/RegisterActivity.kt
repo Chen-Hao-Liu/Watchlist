@@ -51,16 +51,16 @@ class RegisterActivity : AppCompatActivity() {
             val passInputA: String = enterPassA.getText().toString()
             val passInputB: String = enterPassB.getText().toString()
 
-            Log.d("RegisterActivity", "Email: $emailInput")
-            Log.d("RegisterActivity", "Password: $passInputA")
-            Log.d("RegisterActivity", "Password: $passInputB")
+            Log.d("RegisterActivity", getString(R.string.email) + ": $emailInput")
+            Log.d("RegisterActivity", getString(R.string.password) + ": $passInputA")
+            Log.d("RegisterActivity", getString(R.string.password) + ": $passInputB")
 
             // Check that password matches!
             if(passInputA != passInputB){
-                Log.d("RegisterActivity", "Passwords do not match!")
+                Log.d("RegisterActivity", getString(R.string.passmatch))
                 val toast = Toast.makeText(
                     this@RegisterActivity,
-                    "Passwords do not match!",
+                    getString(R.string.passmatch),
                     Toast.LENGTH_LONG
                 )
                 toast.show()
@@ -78,18 +78,20 @@ class RegisterActivity : AppCompatActivity() {
 
                             ref.setValue(user)
                                 .addOnSuccessListener {
-                                    Log.d("RegisterActivity", "Successfully registered as $email")
+                                    val succReg = getString(R.string.succReg) + " " + email
+                                    Log.d("RegisterActivity", succReg)
                                     Toast.makeText(
                                         this,
-                                        "Successfully registered as $email",
+                                        succReg,
                                         Toast.LENGTH_LONG
                                     ).show()
                                 }
                                 .addOnFailureListener {
-                                    Log.d("RegisterActivity", "Failed to save user: $email")
+                                    val failReg = getString(R.string.failReg) + " " + email
+                                    Log.d("RegisterActivity", failReg)
                                     Toast.makeText(
                                         this,
-                                        "Failed to save user: $email",
+                                        failReg,
                                         Toast.LENGTH_LONG
                                     ).show()
                                 }
@@ -98,13 +100,13 @@ class RegisterActivity : AppCompatActivity() {
                             if(exception is FirebaseAuthUserCollisionException){
                                 Toast.makeText(
                                     this,
-                                    "The account under $emailInput already exists!",
+                                    "$emailInput: " + getString(R.string.alreadyExist),
                                     Toast.LENGTH_LONG
                                 ).show()
                             }else{
                                 Toast.makeText(
                                     this,
-                                    "Failed to register: $exception",
+                                    getString(R.string.regException) + " " + exception,
                                     Toast.LENGTH_LONG
                                 ).show()
                             }
@@ -115,7 +117,7 @@ class RegisterActivity : AppCompatActivity() {
 
         // Return to login page
         retLogin.setOnClickListener{ v: View ->
-            Log.d("RegisterActivity", "Returning to Login Page")
+            Log.d("RegisterActivity", getString(R.string.retLogin))
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }

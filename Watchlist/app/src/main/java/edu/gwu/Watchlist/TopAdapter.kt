@@ -2,7 +2,7 @@ package edu.gwu.Watchlist
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
+import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +11,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.content.res.AppCompatResources
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -20,7 +20,14 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 
-class ListAdapter(val sources: MutableList<Source>, val mContext: Context, val media: String) : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
+class TopAdapter(sourcesList: MutableList<Source>, val mContext: Context, val media: String) : RecyclerView.Adapter<TopAdapter.ViewHolder>() {
+    private var sources: MutableList<Source> = sourcesList
+
+    fun updateAdapter(newList : List<Source>) {
+        for(source in newList){
+            sources.add(source)
+        }
+    }
     override fun getItemCount(): Int {
         // How many rows (total) do you want the adapter to render?
         return sources.size
@@ -33,7 +40,7 @@ class ListAdapter(val sources: MutableList<Source>, val mContext: Context, val m
 
         //Step 1
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
-        val itemView: View = layoutInflater.inflate(R.layout.row_saved, parent, false)
+        val itemView: View = layoutInflater.inflate(R.layout.row_top, parent, false)
 
         //Step 2
         return ViewHolder(itemView)
@@ -45,33 +52,29 @@ class ListAdapter(val sources: MutableList<Source>, val mContext: Context, val m
         val currentSource = sources[position]
 
         val mal_id = currentSource.mal_id
+
+        // Populate holder contents
         holder.title.text = currentSource.title
-        holder.type.text = currentSource.type
-        holder.members.text = currentSource.members
         holder.score.text = currentSource.score
-        holder.yourScore.text = currentSource.userScore
+        holder.members.text = "${currentSource.members} " + mContext.getString(R.string.memTitle)
+        holder.rank.text = currentSource.rank
 
-        // Change based on whether or not user score is set
-        if(currentSource.userScore != "N/A"){
-            holder.yourScoreTitle.text = mContext.getString(R.string.yourScoreTitle)
-            holder.yourScore
-                .setCompoundDrawablesWithIntrinsicBounds(
-                    mContext.getDrawable(android.R.drawable.btn_star_big_on),
-                    null,
-                    null,
-                    null
-                )
-            holder.yourScore.setTextColor(Color.BLACK)
-            holder.yourScoreTitle.setTextColor(Color.BLACK)
-        }else{
-            holder.yourScoreTitle.text = mContext.getString(R.string.notScoreTitle)
+        // start date and end date
+        var start = "TBD"
+        var end = "TBD"
+        if(currentSource.start_date != "null"){
+            start = currentSource.start_date
         }
+        if(currentSource.end_date != "null"){
+            end = currentSource.end_date
+        }
+        holder.dates.text = "$start - $end"
 
-        // different layout depending on anime or manga
-        if(media == "anime") {
-            holder.num.text = "(" + currentSource.episodes + " eps)"
+        // Episodes or volumes
+        if(media == "anime"){
+            holder.number.text = "${currentSource.type} (${currentSource.episodes} eps)"
         } else {
-            holder.num.text = "(Vols: " + currentSource.volumes + " Chapters: " + currentSource.chapters + ")"
+            holder.number.text = "${currentSource.type} (${currentSource.volumes} vols)"
         }
 
         // Picasso load image
@@ -87,16 +90,14 @@ class ListAdapter(val sources: MutableList<Source>, val mContext: Context, val m
 
         // To be implemented
         holder.itemView.setOnClickListener { v: View? ->
-            val intent = Intent(mContext, ReviewActivity::class.java)
-            intent.putExtra("media", media)
-            intent.putExtra("source", currentSource)
+            val url = Uri.parse(currentSource.url)
+            val intent = Intent(Intent.ACTION_VIEW, url)
             mContext.startActivity(intent)
         }
 
         // Initialize the favorite button as not selected
         holder.imageBtn.tag = false
-        holder.imageBtn.background =
-            AppCompatResources.getDrawable(mContext, R.drawable.favorite_unselected)
+        holder.imageBtn.background = getDrawable(mContext, R.drawable.favorite_unselected)
 
         // Acquire Firebase instances
         val uid = FirebaseAuth.getInstance().uid ?: ""
@@ -104,9 +105,9 @@ class ListAdapter(val sources: MutableList<Source>, val mContext: Context, val m
 
         // Acquire saved source if it exists
         val refA = instance.reference.child("/MyList/$uid/$media/$mal_id")
-        refA.addValueEventListener(object : ValueEventListener {
+        refA.addValueEventListener(object : ValueEventListener{
             override fun onCancelled(error: DatabaseError){
-                Log.d("ListAdapter", mContext.getString(R.string.FBRetrieve), error.toException())
+                Log.d("TopAdapter", mContext.getString(R.string.FBConnect), error.toException())
                 Toast.makeText(
                     mContext,
                     mContext.getString(R.string.FBRetrieve),
@@ -118,8 +119,7 @@ class ListAdapter(val sources: MutableList<Source>, val mContext: Context, val m
                 // If source exists, set the favorite button to true
                 if(src != null){
                     holder.imageBtn.tag = true
-                    holder.imageBtn.background =
-                        AppCompatResources.getDrawable(mContext, R.drawable.favorite_selected)
+                    holder.imageBtn.background = getDrawable(mContext, R.drawable.favorite_selected)
                 }
             }
         })
@@ -131,20 +131,22 @@ class ListAdapter(val sources: MutableList<Source>, val mContext: Context, val m
                 val refB = instance.reference.child("/Reviews/$media/$mal_id/$uid")
                 refB.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
-                        val removed = "${currentSource.title}: " + mContext.getString(R.string.removed)
+                        val rem = "${currentSource.title}: " + mContext.getString(R.string.removed)
                         snapshot.ref.removeValue().addOnSuccessListener {
-                            Log.d("ListAdapter", removed)
+                            Log.d("TopAdapter", rem)
                             Toast.makeText(
                                 mContext,
-                                removed,
+                                rem,
                                 Toast.LENGTH_LONG
                             ).show()
                         }
                     }
 
                     override fun onCancelled(databaseError: DatabaseError) {
-                        val failed = "${currentSource.title}: " + mContext.getString(R.string.failRemove) + " " + databaseError
-                        Log.d("ListAdapter", failed)
+                        Log.d(
+                            "TopAdapter",
+                            "${currentSource.title}: " + mContext.getString(R.string.failRemove) + " $databaseError"
+                        )
                     }
                 })
 
@@ -152,26 +154,25 @@ class ListAdapter(val sources: MutableList<Source>, val mContext: Context, val m
                 val refC = instance.reference.child("/MyList/$uid/$media/$mal_id")
                 refC.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
-                        val removed = "${currentSource.title}: " + mContext.getString(R.string.removeList)
                         snapshot.ref.removeValue().addOnSuccessListener {
                             // Set favorite to unselected.
                             holder.imageBtn.tag = false
-                            holder.imageBtn.background = AppCompatResources.getDrawable(
-                                mContext,
-                                R.drawable.favorite_unselected
-                            )
-                            Log.d("ListAdapter", removed)
+                            holder.imageBtn.background = getDrawable(mContext, R.drawable.favorite_unselected)
+                            val removeSuccess = "${currentSource.title}: " + mContext.getString(R.string.removeList)
+                            Log.d("TopAdapter",removeSuccess)
                             Toast.makeText(
                                 mContext,
-                                removed,
+                                removeSuccess,
                                 Toast.LENGTH_LONG
                             ).show()
                         }
                     }
 
                     override fun onCancelled(databaseError: DatabaseError) {
-                        val failed = "${currentSource.title}: " + mContext.getString(R.string.failRemoveList) + " " + databaseError
-                        Log.d("ListAdapter",failed)
+                        Log.d(
+                            "TopAdapter",
+                            "${currentSource.title}: " + mContext.getString(R.string.failRemoveList) + " $databaseError"
+                        )
                     }
                 })
             } else {
@@ -179,40 +180,37 @@ class ListAdapter(val sources: MutableList<Source>, val mContext: Context, val m
                 val refD = instance.reference.child("/MyList/$uid/$media/$mal_id")
                 refD.setValue(currentSource)
                     .addOnSuccessListener {
-                        val saved = "${currentSource.title}: " + mContext.getString(R.string.saved)
-                        Log.d("ListAdapter", saved)
+                        val saveSuccess = "${currentSource.title}: " + mContext.getString(R.string.saved)
+                        Log.d("TopAdapter", saveSuccess)
                         Toast.makeText(
                             mContext,
-                            saved,
+                            saveSuccess,
                             Toast.LENGTH_LONG
                         ).show()
                     }
                     .addOnFailureListener {
-                        val failedSave = "${currentSource.title}: " + mContext.getString(R.string.failedSave)
-                        Log.d("ListAdapter", failedSave)
+                        val saveFail = "${currentSource.title}: " + mContext.getString(R.string.failedSave)
+                        Log.d("TopAdapter", saveFail)
                         Toast.makeText(
                             mContext,
-                            failedSave,
+                            saveFail,
                             Toast.LENGTH_LONG
                         ).show()
                     }
                 holder.imageBtn.tag = true
-                holder.imageBtn.background =
-                    AppCompatResources.getDrawable(mContext, R.drawable.favorite_selected)
+                holder.imageBtn.background = getDrawable(mContext, R.drawable.favorite_selected)
             }
         }
-
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val title: TextView = itemView.findViewById(R.id.savedTitle)
-        val type: TextView = itemView.findViewById(R.id.savedType)
-        val num: TextView = itemView.findViewById(R.id.savedEpisode)
-        val members: TextView = itemView.findViewById(R.id.members)
-        val score: TextView = itemView.findViewById(R.id.audScore)
-        val yourScoreTitle: TextView = itemView.findViewById(R.id.yourScoreTitle)
-        val yourScore: TextView = itemView.findViewById(R.id.yourScore)
-        val image: ImageView = itemView.findViewById(R.id.saveImage)
-        val imageBtn: ImageButton = itemView.findViewById(R.id.favSaved)
+        val title: TextView = itemView.findViewById(R.id.savedTitleTop)
+        val score: TextView = itemView.findViewById(R.id.audScoreTop)
+        val image: ImageView = itemView.findViewById(R.id.saveImageTop)
+        val number: TextView = itemView.findViewById(R.id.savedTypeTop)
+        val members: TextView = itemView.findViewById(R.id.membersTop)
+        val imageBtn: ImageButton = itemView.findViewById(R.id.favTop)
+        val dates: TextView = itemView.findViewById(R.id.dates)
+        val rank: TextView = itemView.findViewById(R.id.overallRank)
     }
 }

@@ -40,7 +40,7 @@ class ReviewActivity : AppCompatActivity()  {
         review = src.userReview
         mal_id = src.mal_id
 
-        title = "My Review $showTitle"
+        title = getString(R.string.title_review_activity) + ": $showTitle"
 
         ratingBar = findViewById(R.id.ratingBar)
         writeReview = findViewById(R.id.writeReview)
@@ -87,12 +87,12 @@ class ReviewActivity : AppCompatActivity()  {
                     startActivity(intent)
                 }
                 R.id.action_top -> {
-                    //val intent = Intent(this, MapsActivity::class.java)
-                    //startActivity(intent)
+                    val intent = Intent(this, TopActivity::class.java)
+                    startActivity(intent)
                 }
                 R.id.action_profile ->{
-                    //val intent = Intent(this, ProfileActivity::class.java)
-                    //startActivity(intent)
+                    val intent = Intent(this, LogoutActivity::class.java)
+                    startActivity(intent)
                 }
             }
             return@setOnNavigationItemSelectedListener true
@@ -101,8 +101,9 @@ class ReviewActivity : AppCompatActivity()  {
         // Submit review
         submit.setOnClickListener{ v: View ->
             updateReviews()
-            val intent = Intent(this, ListActivity::class.java)
-            startActivity(intent)
+            // disable submit button until new changes detected
+            submit.isEnabled = false
+            submit.background = getDrawable(R.drawable.rounded_button_unselected)
         }
 
         // Read other reviews
@@ -131,18 +132,20 @@ class ReviewActivity : AppCompatActivity()  {
         var refA = instance.reference.child("/MyList/$uid/$media/$mal_id")
         refA.setValue(src)
             .addOnSuccessListener {
-                Log.d("ReviewActivity", "Updated user review in MyList for $showTitle successfully!")
+                val saveMyList = "$showTitle: " + getString(R.string.saveMyList)
+                Log.d("ReviewActivity", saveMyList)
                 Toast.makeText(
                     this@ReviewActivity,
-                    "Updated user review in MyList for $showTitle successfully!",
+                    saveMyList,
                     Toast.LENGTH_LONG
                 ).show()
             }
             .addOnFailureListener {
-                Log.d("ReviewActivity", "Failed to update user review in MyList for $showTitle!")
+                val failMyList = "$showTitle: " + getString(R.string.failMyList)
+                Log.d("ReviewActivity", failMyList)
                 Toast.makeText(
                     this@ReviewActivity,
-                    "Failed to update user review in MyList for $showTitle!",
+                    failMyList,
                     Toast.LENGTH_LONG
                 ).show()
             }
@@ -153,18 +156,20 @@ class ReviewActivity : AppCompatActivity()  {
         val update = Review(myEmail, myScore, myReview)
         refB.setValue(update)
             .addOnSuccessListener {
-                Log.d("ReviewActivity", "Saved review for $showTitle successfully!")
+                val savReview = "$showTitle: " + getString(R.string.savReview)
+                Log.d("ReviewActivity", savReview)
                 Toast.makeText(
                     this,
-                    "Saved review for $showTitle successfully!",
+                    savReview,
                     Toast.LENGTH_LONG
                 ).show()
             }
             .addOnFailureListener {
-                Log.d("ReviewActivity", "Failed to save review for $showTitle!")
+                val failedRev = "$showTitle: " + getString(R.string.failedRev)
+                Log.d("ReviewActivity", failedRev)
                 Toast.makeText(
                     this,
-                    "Failed to save review for $showTitle!",
+                    failedRev,
                     Toast.LENGTH_LONG
                 ).show()
             }
