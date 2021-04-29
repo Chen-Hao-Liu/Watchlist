@@ -1,31 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Watchlist</string>
 
-    <string name="title_register_activity">Registration</string>
-    <string name="title_search_activity">Search</string>
-    <string name="title_results_activity">search for</string>
-    <string name="title_list_activity">My List</string>
-    <string name="title_review_activity">My Review</string>
-    <string name="title_others_activity">Audience Reviews for</string>
-    <string name="title_top_activity">Top results for</string>
-    <string name="title_logout_activity">My Profile</string>
+    <string name="title_register_activity">Enregistrement</string>
+    <string name="title_search_activity">Rechercher</string>
+    <string name="title_results_activity">rechercher</string>
+    <string name="title_list_activity">Ma Liste</string>
+    <string name="title_review_activity">Mon Avis</string>
+    <string name="title_others_activity">Critiques d\'audience pour</string>
+    <string name="title_top_activity">Meilleurs resultats pour</string>
+    <string name="title_logout_activity">Mon Profil</string>
 
-    <string name="login">LOGIN</string>
-    <string name="signUp">REGISTER FOR ACCOUNT</string>
+    <string name="login">CONNEXION</string>
+    <string name="signUp">CREER UN COMPTE</string>
     <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="remember">Save Login</string>
+    <string name="password">Le mot de passe</string>
+    <string name="remember">Enregistrer la connexion</string>
 
-    <string name="register">Register</string>
-    <string name="emailRegister">Enter Email</string>
-    <string name="passRegisterA">Enter Password</string>
-    <string name="passRegisterB">Password Confirmation</string>
-    <string name="submitReg">REGISTER</string>
-    <string name="returnLogin">RETURN TO LOGIN</string>
+    <string name="register">S\'inscrire</string>
+    <string name="emailRegister">Entrez l\'email</string>
+    <string name="passRegisterA">Enter le mot de passe</string>
+    <string name="passRegisterB">Confirmation mot de passe</string>
+    <string name="submitReg">S\'inscrire</string>
+    <string name="returnLogin">RETOUR A LA CONNEXION</string>
 
-    <string name="searchTitle">Search</string>
-    <string name="filters">Additional Filters</string>
-    <string name="searchBtn">SEARCH</string>
+    <string name="searchTitle">Rechercher</string>
+    <string name="filters">Filtres Supplementaires</string>
+    <string name="searchBtn">Rechercher</string>
 
     <string-array name="aniMangaArr">
         <item>anime</item>
@@ -33,7 +34,7 @@
     </string-array>
 
     <string-array name="ATypeArr">
-        <item>Select Type</item>
+        <item>Selectionner le genre</item>
         <item>tv</item>
         <item>ova</item>
         <item>movie</item>
@@ -42,7 +43,7 @@
         <item>music</item>
     </string-array>
     <string-array name="MTypeArr">
-        <item>Select Type</item>
+        <item>Selectionner le genre</item>
         <item>manga</item>
         <item>novel</item>
         <item>oneshot</item>
@@ -52,20 +53,20 @@
     </string-array>
 
     <string-array name="AStatusArr">
-        <item>Select Status</item>
+        <item>Selectionnez le statut</item>
         <item>airing</item>
         <item>completed</item>
         <item>to_be_aired</item>
     </string-array>
     <string-array name="MStatusArr">
-        <item>Select Status</item>
+        <item>Selectionnez le statut</item>
         <item>publishing</item>
         <item>completed</item>
         <item>to_be_published</item>
     </string-array>
 
     <string-array name="AOrderByArr">
-        <item>Select Order By</item>
+        <item>Ordre par hauteur</item>
         <item>title</item>
         <item>start_date</item>
         <item>end_date</item>
@@ -77,7 +78,7 @@
         <item>rating</item>
     </string-array>
     <string-array name="MOrderByArr">
-        <item>Select Order By</item>
+        <item>Ordre par hauteur</item>
         <item>title</item>
         <item>start_date</item>
         <item>end_date</item>
@@ -90,7 +91,7 @@
     </string-array>
 
     <string-array name="AGenreArr">
-        <item>Select Genre</item>
+        <item>Selectionnez le genre</item>
         <item>Action</item>
         <item>Adventure</item>
         <item>Cars</item>
@@ -136,7 +137,7 @@
         <item>Josei</item>
     </string-array>
     <string-array name="MGenreArr">
-        <item>Select Genre</item>
+        <item>Selectionnez le genre</item>
         <item>Action</item>
         <item>Adventure</item>
         <item>Cars</item>
@@ -185,7 +186,7 @@
     </string-array>
 
     <string-array name="ratedArr">
-        <item>Select Rating</item>
+        <item>Selectionnez une note</item>
         <item>g</item>
         <item>pg</item>
         <item>pg13</item>
@@ -201,41 +202,41 @@
     <string name="episodes">16</string>
     <string name="showRating">R+</string>
 
-    <string name="find">Find</string>
-    <string name="list">My List</string>
-    <string name="top">Top</string>
-    <string name="profile">Profile</string>
+    <string name="find">Trouve</string>
+    <string name="list">Ma Liste</string>
+    <string name="top">Haut</string>
+    <string name="profile">Profil</string>
 
-    <string name="savedType">TV</string>
+    <string name="savedType">La tele</string>
     <string name="savedEpisode">(12)</string>
-    <string name="memTitle">members</string>
+    <string name="memTitle">membres</string>
     <string name="members">75,012</string>
     <string name="audScore">9.31</string>
-    <string name="yourScoreTitle">Your Score</string>
-    <string name="notScoreTitle">Not Scored</string>
+    <string name="yourScoreTitle">Ton Score</string>
+    <string name="notScoreTitle">Pas Note</string>
     <string name="yourScore">N/A</string>
 
-    <string name="leaveRating">Tape to Rate</string>
-    <string name="leaveReview">Leave a Review</string>
-    <string name="submitReview">Submit Review</string>
-    <string name="readReviews">Other Reviews</string>
-    <string name="writeReview">So ...</string>
+    <string name="leaveRating">Appuyez pour evaluer</string>
+    <string name="leaveReview">Laisser un commentaire</string>
+    <string name="submitReview">Poster le commentaire</string>
+    <string name="readReviews">Autres Avis</string>
+    <string name="writeReview">Donc ...</string>
 
     <string name="reviewEmail">chliu@gwu.edu</string>
     <string name="reviewScore">9.5</string>
     <string name="othersReview">Story is well written. Incredibly well fleshed-out cast of characters. Fast paced action. No filler. Every plot element has its place. AOT is truly a modern day masterpiece.</string>
 
-    <string name="reviewNum">TV (12)</string>
-    <string name="reviewMem">75,012 members</string>
-    <string name="reviewScoreTitle">Overall Score</string>
-    <string name="noReviewTitle">No Scores</string>
-    <string name="numReviews">No Reviews</string>
-    <string name="overRank">Rank</string>
+    <string name="reviewNum">La Tele (12)</string>
+    <string name="reviewMem">75,012 membres</string>
+    <string name="reviewScoreTitle">Score Global</string>
+    <string name="noReviewTitle">Pas de scores</string>
+    <string name="numReviews">Aucun Avis</string>
+    <string name="overRank">Rang</string>
     <string name="rankings">23</string>
     <string name="dates">Apr 2019 - Jul 2019</string>
 
     <string-array name="animeCat">
-        <item>general</item>
+        <item>en general</item>
         <item>airing</item>
         <item>upcoming</item>
         <item>tv</item>
@@ -247,7 +248,7 @@
     </string-array>
 
     <string-array name="mangaCat">
-        <item>general</item>
+        <item>en general</item>
         <item>manga</item>
         <item>novels</item>
         <item>oneshots</item>
@@ -258,38 +259,38 @@
         <item>favorite</item>
     </string-array>
 
-    <string name="signOut">Sign Out</string>
+    <string name="signOut">se deconnecter</string>
     <string name="myemail">something@gmail.com</string>
 
-    <string name="FBConnect">Failed to connect to Firebase!</string>
-    <string name="emptyList">Your list is empty!</string>
-    <string name="FBRetrieve">Failed to retrieve source from DB!</string>
-    <string name="removed">Removed from reviews successfully!</string>
-    <string name="failRemove">Failed to remove from reviews!</string>
-    <string name="removeList">Removed from list successfully!</string>
-    <string name="failRemoveList">Failed to remove from list!</string>
-    <string name="saved">Saved to MyList successfully!</string>
-    <string name="failedSave">Fail to save to MyList!</string>
-    <string name="goReg">Going to Register Page!</string>
-    <string name="loggedIn">Logged in as</string>
-    <string name="invalid">Login credentials are invalid!</string>
-    <string name="failedLogIn">Failed to login: </string>
-    <string name="failedReview">Failed to retrieve review from DB!</string>
-    <string name="noRevs">No reviews available for </string>
-    <string name="overall_score">Overall Score</string>
-    <string name="reviews">Reviews</string>
-    <string name="passmatch">Passwords do not match!</string>
-    <string name="succReg">Successfully registered as </string>
-    <string name="failReg">Failed to save user: </string>
-    <string name="alreadyExist">The account already exists!</string>
-    <string name="regException">Failed to register: </string>
-    <string name="retLogin">Returning to Login Page!</string>
-    <string name="noResults">Search yielded no further results!</string>
-    <string name="jikanFail">Jikan API failed!</string>
+    <string name="FBConnect">Echec de la connexion a Firebase!</string>
+    <string name="emptyList">Ta liste est vide!</string>
+    <string name="FBRetrieve">N\'a pas reussi a recuperer la source de la base de donnees!</string>
+    <string name="removed">Supprime des avis avec succes!</string>
+    <string name="failRemove">Echec de la suppression des avis!</string>
+    <string name="removeList">Supprime de la liste avec succes!</string>
+    <string name="failRemoveList">Echec de la suppression de la liste!</string>
+    <string name="saved">Enregistre dans ma liste avec succes!</string>
+    <string name="failedSave">Ne pas enregistrer dans ma liste!</string>
+    <string name="goReg">Allez a la page d\'inscription!</string>
+    <string name="loggedIn">Connecte en tant que</string>
+    <string name="invalid">Les identifiants de connexion ne sont pas valides!</string>
+    <string name="failedLogIn">Echec de connexion: </string>
+    <string name="failedReview">Echec de la recuperation de l\'avis de DB!</string>
+    <string name="noRevs">Aucun avis disponible pour</string>
+    <string name="overall_score">Score Global</string>
+    <string name="reviews">Commentaires</string>
+    <string name="passmatch">Les mots de passe ne correspondent pas!</string>
+    <string name="succReg">Enregistre avec succes en tant que</string>
+    <string name="failReg">Echec de l\'enregistrement de l\'utilisateur: </string>
+    <string name="alreadyExist">Le compte existe deja!</string>
+    <string name="regException">N\'a pas reussi a s\'inscrire:</string>
+    <string name="retLogin">Retour a la page de connexion!</string>
+    <string name="noResults">La recherche n\'a donne aucun autre resultat!</string>
+    <string name="jikanFail">Jikan API manque!</string>
 
-    <string name="saveMyList">Updated user review in MyList successfully!</string>
-    <string name="failMyList">Failed to update user review in MyList!</string>
+    <string name="saveMyList">Mise a jour de l\'avis d\'utilisateur dans ma liste avec succes!</string>
+    <string name="failMyList">Echec de la mise a jour de l\'avis des utilisateurs dans ma liste!</string>
 
-    <string name="savReview">Saved review successfully!</string>
-    <string name="failedRev">Failed to save review!</string>
+    <string name="savReview">Avis enregistre avec succes!</string>
+    <string name="failedRev">Echec de l\'enregistrement de l\'avis!</string>
 </resources>

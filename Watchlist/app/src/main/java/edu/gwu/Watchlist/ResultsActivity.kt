@@ -2,7 +2,6 @@ package edu.gwu.Watchlist
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Parcelable
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
@@ -19,7 +18,6 @@ class ResultsActivity : AppCompatActivity() {
     private lateinit var sourceManager: SourceManager
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var adapter: SourcesAdapter
-    private lateinit var savedState: Parcelable
     private lateinit var searchTerm: String
     private lateinit var media: String
     private lateinit var type: String
@@ -54,7 +52,7 @@ class ResultsActivity : AppCompatActivity() {
         progressBar = findViewById(R.id.progressBar)
         sourceManager = SourceManager()
 
-        title = "Search $media for '$searchTerm'"
+        title = "$media " + getString(R.string.title_results_activity) + " '$searchTerm'"
 
         // Retrieve first page
         progressBar.visibility = View.VISIBLE
@@ -71,8 +69,7 @@ class ResultsActivity : AppCompatActivity() {
                 if (total == lastPosition && load) {
                     load = false
                     Log.d("ResultsActivity", "Position: $lastPosition, Total: $total, Page: $page")
-                    // Save position
-                    savedState = recyclerView.layoutManager?.onSaveInstanceState()!!
+
                     progressBar.visibility = View.VISIBLE
                     sourceSelection()
                 }
@@ -91,12 +88,12 @@ class ResultsActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
                 R.id.action_top -> {
-                    //val intent = Intent(this, MapsActivity::class.java)
-                    //startActivity(intent)
+                    val intent = Intent(this, TopActivity::class.java)
+                    startActivity(intent)
                 }
                 R.id.action_profile ->{
-                    //val intent = Intent(this, ProfileActivity::class.java)
-                    //startActivity(intent)
+                    val intent = Intent(this, LogoutActivity::class.java)
+                    startActivity(intent)
                 }
             }
             return@setOnNavigationItemSelectedListener true
@@ -121,8 +118,6 @@ class ResultsActivity : AppCompatActivity() {
                         } else {
                             adapter.updateAdapter(sources)
                             adapter.notifyDataSetChanged()
-                            // Restore position
-                            recyclerView.layoutManager?.onRestoreInstanceState(savedState)
                         }
                         // End progress bar
                         progressBar.visibility = View.INVISIBLE
@@ -133,7 +128,7 @@ class ResultsActivity : AppCompatActivity() {
                     }
                 }else{
                     runOnUiThread {
-                        var notification = "Search for $searchTerm yielded no further results"
+                        var notification = "$searchTerm: " + getString(R.string.noResults)
                         Log.d("ResultsActivity", notification)
                         val toast = Toast.makeText(
                             this@ResultsActivity,
@@ -148,10 +143,10 @@ class ResultsActivity : AppCompatActivity() {
                     }
                 }
             }catch(exception: Exception){
-                Log.e("ResultsActivity", "Jikan API failed!", exception)
+                Log.e("ResultsActivity", getString(R.string.jikanFail), exception)
                 Toast.makeText(
                     this@ResultsActivity,
-                    "Jikan API failed! : $exception",
+                    getString(R.string.jikanFail) + " : $exception",
                     Toast.LENGTH_LONG
                 ).show()
 

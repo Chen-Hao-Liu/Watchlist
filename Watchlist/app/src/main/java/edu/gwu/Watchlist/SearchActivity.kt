@@ -125,12 +125,12 @@ class SearchActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
                 R.id.action_top -> {
-                    //val intent = Intent(this, MapsActivity::class.java)
-                    //startActivity(intent)
+                    val intent = Intent(this, TopActivity::class.java)
+                    startActivity(intent)
                 }
                 R.id.action_profile ->{
-                    //val intent = Intent(this, ProfileActivity::class.java)
-                    //startActivity(intent)
+                    val intent = Intent(this, LogoutActivity::class.java)
+                    startActivity(intent)
                 }
 
             }
@@ -149,19 +149,6 @@ class SearchActivity : AppCompatActivity() {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             // Apply the adapter to the spinner
             spin.adapter = adapter
-        }
-
-        // Instantiate adapter for retrieving selected item
-        spin.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-                // An item was selected. You can retrieve the selected item using
-                // val category = parent.getItemAtPosition(pos).toString()
-                // Populate recyclerView cards with category search
-                // sourceSelection(category)
-            }
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                // Another interface callback
-            }
         }
     }
 

@@ -9,9 +9,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
 import com.google.android.gms.tasks.Task
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.AuthResult
@@ -24,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var loginButt: Button
     private lateinit var registerButt: Button
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var saveSwitch: Switch
     private lateinit var preferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,30 +35,48 @@ class MainActivity : AppCompatActivity() {
         password = findViewById(R.id.password)
         loginButt = findViewById(R.id.login)
         registerButt = findViewById(R.id.signUp)
+        saveSwitch = findViewById(R.id.remember)
 
         // sharedPreferences for user
         preferences = getSharedPreferences("watchlist", Context.MODE_PRIVATE)
-        email.setText(preferences.getString("save_username", ""))
-        password.setText(preferences.getString("save_pass", ""))
 
-        // track login input
-        email.addTextChangedListener(textWatcher)
-        password.addTextChangedListener(textWatcher)
-
-        if(email.toString() == ""){
+        // Check if saved preferences exist
+        if(preferences.contains("save_username") && preferences.contains("save_pass")){
+            saveSwitch.isChecked = true
+            email.setText(preferences.getString("save_username", ""))
+            password.setText(preferences.getString("save_pass", ""))
+            // Intialize to enabled
+            loginButt.isEnabled = true
+            loginButt.background = getDrawable(R.drawable.rounded_button)
+        }else{
+            saveSwitch.isChecked = false
             // Intialize to disabled
             loginButt.isEnabled = false
             loginButt.background = getDrawable(R.drawable.rounded_button_unselected)
         }
 
+        // track login input
+        email.addTextChangedListener(textWatcher)
+        password.addTextChangedListener(textWatcher)
+
         loginButt.setOnClickListener{ v: View ->
             submit()
         }
         registerButt.setOnClickListener{ v: View ->
-            Log.d("MainActivity", "Going to Register Page")
+            Log.d("MainActivity", getString(R.string.goReg))
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
+
+        // Track changes to saveSwitch
+        saveSwitch.setOnCheckedChangeListener(object : CompoundButton.OnCheckedChangeListener{
+            override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
+                if(!isChecked){
+                    // clear existing login credentials
+                    preferences.edit().clear().commit()
+                }
+            }
+        })
     }
 
     private fun submit() {
@@ -74,22 +91,27 @@ class MainActivity : AppCompatActivity() {
                 if (task.isSuccessful){
                     val currentUser = firebaseAuth.currentUser!!
                     val email = currentUser.email
-                    Toast.makeText(this, "Logged in as $email", Toast.LENGTH_LONG).show()
+                    val loggedIn = getString(R.string.loggedIn) + " " + email
+                    Toast.makeText(this, loggedIn, Toast.LENGTH_LONG).show()
 
-                    // Save login credentials to preferences
-                    preferences.edit()
-                        .putString("save_username", emailInput)
-                        .putString("save_pass", passInput)
-                        .commit()
+                    // If user decided to save credentials
+                    if(saveSwitch.isChecked){
+                        // Save login credentials to preferences
+                        preferences.edit()
+                            .putString("save_username", emailInput)
+                            .putString("save_pass", passInput)
+                            .commit()
+                    }
 
                     val intent = Intent(this, SearchActivity::class.java)
                     startActivity(intent)
                 } else {
                     val exception = task.exception
                     if (exception is FirebaseAuthInvalidCredentialsException) {
-                        Toast.makeText(this, "Login credentials are invalid!", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, getString(R.string.invalid), Toast.LENGTH_LONG).show()
                     } else {
-                        Toast.makeText(this,"Failed to login: $exception", Toast.LENGTH_LONG).show()
+                        val failedLogIn = getString(R.string.failedLogIn) + " " + exception
+                        Toast.makeText(this, failedLogIn, Toast.LENGTH_LONG).show()
                     }
                 }
             }

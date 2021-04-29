@@ -22,11 +22,13 @@ class ListActivity  : AppCompatActivity()  {
     private lateinit var aniManga: Spinner
     private lateinit var navBar: BottomNavigationView
     private lateinit var emptyList: ImageView
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
+        progressBar = findViewById(R.id.listProgress)
         aniManga = findViewById(R.id.aniMangaB)
         recyclerView = findViewById(R.id.recyclerList)
         navBar = findViewById(R.id.navBar_List)
@@ -69,12 +71,12 @@ class ListActivity  : AppCompatActivity()  {
 
                 }
                 R.id.action_top -> {
-                    //val intent = Intent(this, MapsActivity::class.java)
-                    //startActivity(intent)
+                    val intent = Intent(this, TopActivity::class.java)
+                    startActivity(intent)
                 }
                 R.id.action_profile ->{
-                    //val intent = Intent(this, ProfileActivity::class.java)
-                    //startActivity(intent)
+                    val intent = Intent(this, LogoutActivity::class.java)
+                    startActivity(intent)
                 }
             }
             return@setOnNavigationItemSelectedListener true
@@ -82,18 +84,22 @@ class ListActivity  : AppCompatActivity()  {
     }
 
     fun retrieveSavedSources(media: String){
+        // Make progress bar visible
+        progressBar.visibility = View.VISIBLE
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val reference = FirebaseDatabase.getInstance().reference
             .child("/MyList/$uid/$media")
 
         reference.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError){
-                Log.d("ListActivity", "Failed to connect to Firebase!", error.toException())
+                Log.d("ListActivity", getString(R.string.FBConnect), error.toException())
                 Toast.makeText(
                     this@ListActivity,
-                    "Failed to retrieve source from DB!",
+                    getString(R.string.FBConnect),
                     Toast.LENGTH_LONG
                 ).show()
+                // Make progress bar invisible
+                progressBar.visibility = View.INVISIBLE
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -106,13 +112,14 @@ class ListActivity  : AppCompatActivity()  {
                     }
                 }
 
+                val emptyError = "$media: " + getString(R.string.emptyList)
                 // In case your list is empty
                 if(sources.isEmpty()){
                     emptyList.visibility = View.VISIBLE
-                    Log.d("ListActivity", "Your $media list is empty!")
+                    Log.d("ListActivity", emptyError)
                     Toast.makeText(
                         this@ListActivity,
-                        "Your $media list is empty!",
+                        emptyError,
                         Toast.LENGTH_LONG
                     ).show()
                 }else{
@@ -123,6 +130,9 @@ class ListActivity  : AppCompatActivity()  {
                 recyclerView.adapter = listAdapter
                 layoutManager = LinearLayoutManager(this@ListActivity)
                 recyclerView.layoutManager = layoutManager
+
+                // Make progress bar invisible
+                progressBar.visibility = View.INVISIBLE
             }
         })
     }

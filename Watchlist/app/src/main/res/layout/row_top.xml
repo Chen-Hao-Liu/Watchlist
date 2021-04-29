@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/savedCard"
+        android:id="@+id/topCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -21,18 +21,31 @@
             android:background="@drawable/gradient_blue">
 
             <ImageButton
-                android:id="@+id/favSaved"
+                android:id="@+id/favTop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:background="#FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/guideline3"
-                app:layout_constraintTop_toBottomOf="@+id/memTitle"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineTop"
+                app:layout_constraintTop_toBottomOf="@+id/membersTop"
                 app:srcCompat="@drawable/favorite_unselected" />
 
+            <TextView
+                android:id="@+id/rankTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/overRank"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guidelineTop"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <ImageView
-                android:id="@+id/saveImage"
+                android:id="@+id/saveImageTop"
                 android:layout_width="75dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
@@ -45,65 +58,44 @@
                 app:srcCompat="@drawable/ic_launcher_foreground" />
 
             <TextView
-                android:id="@+id/savedTitle"
+                android:id="@+id/savedTitleTop"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                android:textColor="#FFFFFF"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineTop"
+                app:layout_constraintStart_toEndOf="@+id/saveImageTop"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/seriesTitle" />
+
+            <TextView
+                android:id="@+id/savedTypeTop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/reviewNum"
+                android:textColor="#FFFFFF"
+                app:layout_constraintStart_toEndOf="@+id/saveImageTop"
+                app:layout_constraintTop_toBottomOf="@+id/dates" />
+
+            <TextView
+                android:id="@+id/membersTop"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                android:text="@string/reviewMem"
                 android:textColor="#FFFFFF"
-                app:layout_constraintEnd_toStartOf="@+id/guideline3"
-                app:layout_constraintStart_toEndOf="@+id/saveImage"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="@string/seriesTitle" />
+                app:layout_constraintEnd_toStartOf="@+id/guidelineTop"
+                app:layout_constraintStart_toEndOf="@+id/savedTypeTop"
+                app:layout_constraintTop_toBottomOf="@+id/dates" />
 
             <TextView
-                android:id="@+id/savedType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/savedType"
-                android:textColor="#FFFFFF"
-                app:layout_constraintStart_toEndOf="@+id/saveImage"
-                app:layout_constraintTop_toBottomOf="@+id/savedTitle" />
-
-            <TextView
-                android:id="@+id/savedEpisode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/savedEpisode"
-                android:textColor="#FFFFFF"
-                app:layout_constraintStart_toEndOf="@+id/savedType"
-                app:layout_constraintTop_toBottomOf="@+id/savedTitle" />
-
-            <TextView
-                android:id="@+id/members"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"
-                android:text="@string/members"
-                android:textColor="#FFFFFF"
-                app:layout_constraintStart_toEndOf="@+id/saveImage"
-                app:layout_constraintTop_toBottomOf="@+id/savedType" />
-
-            <TextView
-                android:id="@+id/memTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
-                android:text="@string/memTitle"
-                android:textColor="#FFFFFF"
-                app:layout_constraintStart_toEndOf="@+id/members"
-                app:layout_constraintTop_toBottomOf="@+id/savedEpisode" />
-
-            <TextView
-                android:id="@+id/audScore"
+                android:id="@+id/audScoreTop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -114,39 +106,44 @@
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/saveImage"
-                app:layout_constraintTop_toBottomOf="@+id/members" />
-
-            <TextView
-                android:id="@+id/yourScore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:drawableStart="@android:drawable/btn_star_big_off"
-                android:text="@string/yourScore"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline3"
-                app:layout_constraintTop_toBottomOf="@+id/yourScoreTitle" />
+                app:layout_constraintStart_toEndOf="@+id/saveImageTop"
+                app:layout_constraintTop_toBottomOf="@+id/membersTop" />
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline3"
+                android:id="@+id/guidelineTop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="280dp" />
+                android:visibility="visible"
+                app:layout_constraintGuide_begin="320dp" />
 
             <TextView
-                android:id="@+id/yourScoreTitle"
+                android:id="@+id/overallRank"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:text="@string/yourScoreTitle"
+                android:layout_marginTop="8dp"
+                android:text="@string/rankings"
                 android:textAlignment="center"
+                android:textColor="#2FDDFF"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline3"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="@+id/guidelineTop"
+                app:layout_constraintTop_toBottomOf="@+id/rankTitle" />
+
+            <TextView
+                android:id="@+id/dates"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/dates"
+                android:textColor="#FFFFFF"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineTop"
+                app:layout_constraintStart_toEndOf="@+id/saveImageTop"
+                app:layout_constraintTop_toBottomOf="@+id/savedTitleTop" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

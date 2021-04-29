@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background">
 
     <Button
         android:id="@+id/readReviews"
@@ -16,7 +17,7 @@
         android:foreground="?attr/selectableItemBackground"
         android:outlineProvider="none"
         android:text="@string/readReviews"
-        android:textColor="@android:color/darker_gray"
+        android:textColor="@color/title_text"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/navBar_Review"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,6 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/leaveReview"
+        android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,6 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/leaveRating"
+        android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -104,7 +107,7 @@
         android:id="@+id/navBar_Review"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/white"
+        android:background="@color/nav_bar_background_color"
         app:itemIconTint="@color/nav_bar_color"
         app:itemTextColor="@color/nav_bar_color"
         app:layout_constraintBottom_toBottomOf="parent"

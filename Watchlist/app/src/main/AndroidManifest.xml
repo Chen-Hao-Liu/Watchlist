@@ -28,6 +28,12 @@
         <activity
             android:name=".OtherReviewsActivity"
             android:label="@string/title_others_activity"></activity>
+        <activity
+            android:name=".TopActivity"
+            android:label="@string/title_top_activity"></activity>
+        <activity
+            android:name=".LogoutActivity"
+            android:label="@string/title_logout_activity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

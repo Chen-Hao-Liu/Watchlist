@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -38,6 +39,7 @@ class OtherReviewsActivity : AppCompatActivity() {
     private lateinit var reviewScore: TextView
     private lateinit var emptyList: ImageView
     private lateinit var reviewCard: CardView
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +48,7 @@ class OtherReviewsActivity : AppCompatActivity() {
         src = intent.getParcelableExtra<Source>("source")!!
         media = intent.getStringExtra("media")
 
-        title = "Audience Reviews for ${src.title}"
+        title =  getString(R.string.title_others_activity) + " " + src.title
 
         recyclerView = findViewById(R.id.othersRecycler)
         navBar = findViewById(R.id.navBar_Others)
@@ -59,9 +61,10 @@ class OtherReviewsActivity : AppCompatActivity() {
         reviewScore = findViewById(R.id.reviewScore)
         emptyList = findViewById(R.id.noReviews)
         reviewCard = findViewById(R.id.reviewCardTitle)
+        progressBar = findViewById(R.id.othersProgress)
 
         reviewName.setText(src.title)
-        val numMem = "${src.members} members"
+        val numMem = "${src.members} " + getString(R.string.memTitle)
         reviewMem.setText(numMem)
 
         // Set different reviewNum depending on anime or manga
@@ -96,12 +99,12 @@ class OtherReviewsActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
                 R.id.action_top -> {
-                    //val intent = Intent(this, MapsActivity::class.java)
-                    //startActivity(intent)
+                    val intent = Intent(this, TopActivity::class.java)
+                    startActivity(intent)
                 }
                 R.id.action_profile ->{
-                    //val intent = Intent(this, ProfileActivity::class.java)
-                    //startActivity(intent)
+                    val intent = Intent(this, LogoutActivity::class.java)
+                    startActivity(intent)
                 }
             }
             return@setOnNavigationItemSelectedListener true
@@ -119,17 +122,21 @@ class OtherReviewsActivity : AppCompatActivity() {
     }
 
     fun retrieveSavedReviews(media: String, mal_id: String){
+        // Show progress bar
+        progressBar.visibility = View.VISIBLE
         val reference = FirebaseDatabase.getInstance().reference
             .child("/Reviews/$media/$mal_id")
 
         reference.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError){
-                Log.d("ListActivity", "Failed to connect to Firebase!", error.toException())
+                Log.d("ListActivity", getString(R.string.failedReview), error.toException())
                 Toast.makeText(
                     this@OtherReviewsActivity,
-                    "Failed to retrieve review from DB!",
+                    getString(R.string.failedReview),
                     Toast.LENGTH_LONG
                 ).show()
+                // Make progress bar invisible
+                progressBar.visibility = View.INVISIBLE
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -154,16 +161,17 @@ class OtherReviewsActivity : AppCompatActivity() {
                 // In case your list is empty
                 if(reviews.isEmpty()){
                     // set score title
-                    reviewScoreTitle.setText("No Scores")
+                    reviewScoreTitle.setText(getString(R.string.noReviewTitle))
                     reviewScore.setText("N/A")
-                    numReviews.setText("No Reviews")
+                    numReviews.setText(getString(R.string.numReviews))
 
+                    val noRevs = getString(R.string.noRevs) + " ${src.title}!"
                     // make empty icon available
                     emptyList.visibility = View.VISIBLE
-                    Log.d("OtherReviewsActivity", "No reviews available for ${src.title}!")
+                    Log.d("OtherReviewsActivity", noRevs)
                     Toast.makeText(
                         this@OtherReviewsActivity,
-                        "No reviews available for ${src.title}!",
+                        noRevs,
                         Toast.LENGTH_LONG
                     ).show()
                 }else{
@@ -174,9 +182,9 @@ class OtherReviewsActivity : AppCompatActivity() {
                     var average = df.format(divide)
 
                     // set score title and score accordingly
-                    reviewScoreTitle.setText("Overall Score")
+                    reviewScoreTitle.setText(getString(R.string.overall_score))
                     reviewScore.setText(average.toString())
-                    numReviews.setText("$total Reviews")
+                    numReviews.setText("$total " + getString(R.string.reviews))
                     reviewScore
                         .setCompoundDrawablesWithIntrinsicBounds(
                             this@OtherReviewsActivity.getDrawable(android.R.drawable.btn_star_big_on),
@@ -193,6 +201,9 @@ class OtherReviewsActivity : AppCompatActivity() {
                 recyclerView.adapter = reviewAdapter
                 layoutManager = LinearLayoutManager(this@OtherReviewsActivity)
                 recyclerView.layoutManager = layoutManager
+
+                // Make progress bar invisible
+                progressBar.visibility = View.INVISIBLE
             }
         })
     }

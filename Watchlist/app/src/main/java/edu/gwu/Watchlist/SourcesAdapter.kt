@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 
-class SourcesAdapter(val sourcesList: MutableList<Source>, val mContext: Context, val media: String) : RecyclerView.Adapter<SourcesAdapter.ViewHolder>() {
+class SourcesAdapter(sourcesList: MutableList<Source>, val mContext: Context, val media: String) : RecyclerView.Adapter<SourcesAdapter.ViewHolder>() {
     private var sources: MutableList<Source> = sourcesList
 
     fun updateAdapter(newList : List<Source>) {
@@ -97,10 +97,10 @@ class SourcesAdapter(val sourcesList: MutableList<Source>, val mContext: Context
         val refA = instance.reference.child("/MyList/$uid/$media/$mal_id")
         refA.addValueEventListener(object : ValueEventListener{
             override fun onCancelled(error: DatabaseError){
-                Log.d("SourcesAdapter", "Failed to connect to Firebase!", error.toException())
+                Log.d("SourcesAdapter", mContext.getString(R.string.FBConnect), error.toException())
                 Toast.makeText(
                     mContext,
-                    "Failed to retrieve source from DB!",
+                    mContext.getString(R.string.FBRetrieve),
                     Toast.LENGTH_LONG
                 ).show()
             }
@@ -122,13 +122,11 @@ class SourcesAdapter(val sourcesList: MutableList<Source>, val mContext: Context
                 refB.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         snapshot.ref.removeValue().addOnSuccessListener {
-                            Log.d(
-                                "SourcesAdapter",
-                                "Removed ${currentSource.title} from reviews successfully!"
-                            )
+                            val rem = "${currentSource.title}: " + mContext.getString(R.string.removed)
+                            Log.d("SourcesAdapter", rem)
                             Toast.makeText(
                                 mContext,
-                                "Removed ${currentSource.title} from reviews successfully!",
+                                rem,
                                 Toast.LENGTH_LONG
                             ).show()
                         }
@@ -137,7 +135,7 @@ class SourcesAdapter(val sourcesList: MutableList<Source>, val mContext: Context
                     override fun onCancelled(databaseError: DatabaseError) {
                         Log.d(
                             "SourcesAdapter",
-                            "Failed to remove ${currentSource.title} from reviews! $databaseError"
+                            "${currentSource.title}: " + mContext.getString(R.string.failRemove) + " $databaseError"
                         )
                     }
                 })
@@ -150,17 +148,21 @@ class SourcesAdapter(val sourcesList: MutableList<Source>, val mContext: Context
                             // Set favorite to unselected.
                             holder.imageBtn.tag = false
                             holder.imageBtn.background = getDrawable(mContext, R.drawable.favorite_unselected)
-                            Log.d("SourcesAdapter","Removed ${currentSource.title} from list successfully!")
+                            val removeSuccess = "${currentSource.title}: " + mContext.getString(R.string.removeList)
+                            Log.d("SourcesAdapter", removeSuccess)
                             Toast.makeText(
                                 mContext,
-                                "Removed ${currentSource.title} from list successfully!",
+                                removeSuccess,
                                 Toast.LENGTH_LONG
                             ).show()
                         }
                     }
 
                     override fun onCancelled(databaseError: DatabaseError) {
-                        Log.d("SourcesAdapter","Failed to remove ${currentSource.title} from list! $databaseError")
+                        Log.d(
+                            "SourcesAdapter",
+                            "${currentSource.title}: " + mContext.getString(R.string.failRemoveList) + " $databaseError"
+                        )
                     }
                 })
             } else {
@@ -168,18 +170,20 @@ class SourcesAdapter(val sourcesList: MutableList<Source>, val mContext: Context
                 val refD = instance.reference.child("/MyList/$uid/$media/$mal_id")
                 refD.setValue(currentSource)
                     .addOnSuccessListener {
-                        Log.d("SourceAdapter", "Saved ${currentSource.title} to MyList successfully!")
+                        val saveSuccess = "${currentSource.title}: " + mContext.getString(R.string.saved)
+                        Log.d("SourceAdapter", saveSuccess)
                         Toast.makeText(
                             mContext,
-                            "Saved ${currentSource.title} to MyList successfully!",
+                            saveSuccess,
                             Toast.LENGTH_LONG
                         ).show()
                     }
                     .addOnFailureListener {
-                        Log.d("SourceAdapter", "Fail to save ${currentSource.title} to MyList!")
+                        val saveFail = "${currentSource.title}: " + mContext.getString(R.string.failedSave)
+                        Log.d("SourceAdapter", saveFail)
                         Toast.makeText(
                             mContext,
-                            "Fail to save ${currentSource.title} to MyList!",
+                            saveFail,
                             Toast.LENGTH_LONG
                         ).show()
                     }

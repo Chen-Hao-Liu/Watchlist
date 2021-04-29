@@ -125,24 +125,24 @@ class SourceManager {
     fun retrieveSources(searchTerm: String, media: String, type: String, status: String, orderBy: String, genre: String, rated: String, page: Int): List<Source> {
         // dynamically form URL based on what parameters are available
         var myUrl = "https://api.jikan.moe/v3/search/$media?q=$searchTerm&page=$page"
-        if(type != "Select Type"){
+        if(type != "Select Type" && type != "Selectionner le genre"){
             val append = "&type=$type"
             myUrl += append
         }
-        if(status != "Select Status"){
+        if(status != "Select Status" && status != "Selectionnez le statut"){
             val append = "&status=$status"
             myUrl += append
         }
-        if(orderBy != "Select Order By"){
+        if(orderBy != "Select Order By" && orderBy != "Ordre par hauteur"){
             val append = "&order_by=$orderBy"
             myUrl += append
         }
-        if(genre != "Select Genre"){
+        if(genre != "Select Genre" && genre != "Selectionnez le genre"){
             val num = sort(media, genre)
             val append = "&genre=$num"
             myUrl += append
         }
-        if(rated != "Select Rating"){
+        if(rated != "Select Rating" && rated != "Selectionnez une note"){
             val append = "&rated=$rated"
             myUrl += append
         }
@@ -214,7 +214,8 @@ class SourceManager {
                         members = members,
                         rated = rated,
                         userScore = "N/A",
-                        userReview = ""
+                        userReview = "",
+                        rank = ""
                     )
                 )
             }

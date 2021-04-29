@@ -10,6 +10,7 @@
         android:id="@+id/reviewCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,7 +19,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/reviewCardConstraint"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradient_blue">
 
             <TextView
                 android:id="@+id/othersReview"
@@ -28,6 +30,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
+                android:textColor="#FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -43,6 +46,7 @@
                 android:layout_marginBottom="8dp"
                 android:drawableStart="@android:drawable/btn_star_big_on"
                 android:text="@string/reviewScore"
+                android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@+id/othersReview"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -55,6 +59,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                android:textColor="#FFFFFF"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="@string/reviewEmail" />
