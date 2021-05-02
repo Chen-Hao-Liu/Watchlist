@@ -1,14 +1,12 @@
-**!!PLEASE READ THE GETTING STARTED SECTION BELOW!!**
+# Project Watchlist
+Watchlist is an Android app that allows you browse for, save, and score/review anime/manga. You can search by top overall, currently airing, upcoming, and more. If you have specific shows in mind, you can do an advanced search, adding on additional search parameters like genre, rating, etc. Add shows to your saved list by tapping on the favorite icon. Favorited shows can be given a score and a review. You can also read other user reviews!
 
-# CSCI 4237 - Project 2 - BYOI
-Bring Your Own Idea!
+I used the [Jikan API](https://jikan.docs.apiary.io/#) for this project.
 
-## Getting Started
-1. Clone this repo to your local machine.
-2. Create a new folder inside of your cloned repo (e.g. like "Project1").
-3. Create a new Android Studio project (min SDK version of API 23). During the initial project setup, set the Save location to the new folder that you just created (e.g. so you can commit your project back into this repo).
-  - **If you are extending Project 1**, you can instead copy your project files into this repo and push them up. You'll need to do this if working in pairs so your partner can access them (in addition to possibly sharing API keys). If you're working individually, I'd still ask you do this for organization's sake for grading.
-4. Use git to add, commit, and push your new project to the `main` branch - now you have your starting point set locally and on GitHub! You are now ready to get started.
-5. Don't forget to branch before you create commits - you'll need to create Pull Requests for the major project deliverables.
+## Screens Examples
 
-View the [Project Requirements Document](https://docs.google.com/document/d/1ipl_SjY2CtwQ144ZL5j86TuAd0xkoNSuvVfM15EZRlE/edit?usp=sharing) for full details!
+<p align="center">
+  <img src="https://github.com/Chen-Hao-Liu/Watchlist/blob/main/screenshots/results.png">
+  <img src="https://github.com/Chen-Hao-Liu/Watchlist/blob/main/screenshots/reviews.png">
+</p>
+
